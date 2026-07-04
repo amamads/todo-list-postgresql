@@ -1,0 +1,14 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" // ◄ این خط حتماً باید اینجا باشد
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Todo{
+  id Int @id @default(autoincrement())
+  isDone Boolean
+  text String
+}
