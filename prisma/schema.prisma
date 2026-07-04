@@ -1,14 +1,13 @@
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db" // ◄ این خط حتماً باید اینجا باشد
+  provider = "postgresql"
 }
-
 generator client {
   provider = "prisma-client-js"
+  output = "./generated"
 }
 
-model Todo{
-  id Int @id @default(autoincrement())
+model Todo {
+  id     Int     @id @default(autoincrement())
   isDone Boolean
-  text String
+  text   String
 }
