@@ -1,10 +1,7 @@
+import type { NextConfig } from "next";
 
-const nextConfig = {
-  experimental: {
-    useDeploymentId: true,
-    // Optionally, use with Server Actions
-    useDeploymentIdServerActions: true,
-  },
+const nextConfig: NextConfig = {
+  /* config options here */
 };
 
 export default nextConfig;
