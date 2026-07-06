@@ -1,7 +1,7 @@
 "use client";
 
 import { deleteTodo, editTodo } from "@/actions";
-import { Todo } from "@prisma/client";
+import { Todo } from "@/generated/prisma/client";
 import { useRef, useState } from "react";
 
 // async function deleteTodo(id: number | string) {
