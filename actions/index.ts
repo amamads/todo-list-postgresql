@@ -1,7 +1,8 @@
 "use server";
 
 import db from "@/db";
-import type { Todo } from "@prisma/client";
+import { Todo } from "@/generated/prisma/client";
+// import type { Todo } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export const getTodos = async (): Promise<Todo[]> => {
