@@ -1,32 +1,18 @@
-// import { PrismaClient } from "@prisma/client";
-
-// const globalForPrisma = global as unknown as { prisma: PrismaClient };
-
-// export const db = globalForPrisma.prisma || new PrismaClient();
-
-// if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
-
-// export default db;
-
+import "dotenv/config";
+import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
-// Initialize the adapter according to your driver's requirements
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const rawDatabaseUrl = process.env.DATABASE_URL;
+const databaseUrl = (rawDatabaseUrl ?? "").trim();
+if (!databaseUrl) {
+  throw new Error("DATABASE_URL is required");
+}
 
-// Pass the adapter instance to PrismaClient
-const prisma = new PrismaClient({ adapter });
-
-// Find all users with their posts
-const users = await prisma.user.findMany({
-  include: { posts: true },
+const adapter = new PrismaPg({
+  connectionString: databaseUrl,
 });
 
-// Create a user with a post
-const user = await prisma.user.create({
-  data: {
-    email: "alice@prisma.io",
-    posts: {
-      create: { title: "Hello World" },
-    },
-  },
-});
+const db = new PrismaClient({ adapter });
+
+export { db };
+export default db;
